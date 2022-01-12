@@ -1,5 +1,27 @@
 [
     {
-        
+        "id":1,
+        "name":"Sapeurs-Pompiers Villeurbanne",
+        "coordinates": [45.778864, 4.878180]
     },
+    {
+        "id":2,
+        "name":"Caserne pompiers Villeurbanne",
+        "coordinates": [45.765345, 4.905267]
+    },
+    {
+        "id":3,
+        "name":"Centre d'intervention Lyon Corneille",
+        "coordinates": [45.7626198,4.8438269]
+    },
+    {
+        "id":4,
+        "name":"Caserne Lyon - Gerland",
+        "coordinates": [45.7315441,4.8275979]
+    },
+    {
+        "id":5,
+        "name":"Centre d'intervention Lyon Croix-Rousse",
+        "coordinates": [45.7839714,4.820841]
+    }
 ]
