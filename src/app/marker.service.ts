@@ -120,6 +120,7 @@ export class MarkerService {
       camion.capacite = data.capacite;
       camion.positionX = data.positionX;
       camion.positionY = data.positionY;
+      camion.type = data.type;
       camions.push(camion);
       this.addTruck(camion);
     }
@@ -133,13 +134,7 @@ export class MarkerService {
       const lng = (data.positionX);
       const newLatLng = new L.LatLng(lat, lng);
       this.camionList.find((x) => x.myCustomID === data.id).setLatLng(newLatLng);
-      /*console.log(this.map._layers);
-      console.log("remove");
-      const test = this.camionList.find((x) => x.myCustomID === data.id)
-      this.map.removeLayer(test);
-      console.log(this.map._layers);*/
     }
-    //this.addTruck(data);
   }
 
   addTruck(data: Camion) {
