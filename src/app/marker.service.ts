@@ -127,7 +127,7 @@ export class MarkerService {
       typeof this.camionList.find((x) => x.myCustomID === data.id) !== "undefined"
     ) {
       console.log(this.camionList.find((x) => x.myCustomID === data.id));
-      this.map.removeLayer(this.camionList.find((x) => x.myCustomID === data.id));
+      this.camionList.find((x) => x.myCustomID === data.id).remove();
     }
     this.addTruck(data);
   }
