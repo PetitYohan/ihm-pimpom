@@ -12,9 +12,7 @@ import { MarkerService } from "./marker.service";
 export class AppComponent {
   idCapteur: number;
   getFeuxValue: Feu[] = [{ id: 0, intensity: 0, positionX: 0, positionY: 0 }];
-  getCamionsValue: Camion[] = [
-    { id: 0, capacite: 0, positionX: 0, positionY: 0, type: "" },
-  ];
+  getCamionsValue: Camion[] = [];
 
   constructor(
     private httpClient: HttpClient,
