@@ -47,14 +47,16 @@ export class AppComponent {
       .subscribe((data: any) => {
         if (typeof data.camions !== "undefined") {
           for (const resp of data.camions) {
-            const camion = new Camion;
-            camion.id = resp.id;
-            camion.capacite = resp.capacite;
-            camion.positionX = resp.positionX;
-            camion.positionY = resp.positionY;
-            camion.type = resp.type;
-            this.markerService.updateCamion(this.getCamionsValue, resp);
-            this.getCamionsValue.push(camion);
+            if (resp.positionX !== "undefined" && resp.positionY !== "undefined") {
+              const camion = new Camion;
+              camion.id = resp.id;
+              camion.capacite = resp.capacite;
+              camion.positionX = resp.positionX;
+              camion.positionY = resp.positionY;
+              camion.type = resp.type;
+              this.markerService.updateCamion(this.getCamionsValue, resp);
+              this.getCamionsValue.push(camion);
+            }
           }
         }
       });

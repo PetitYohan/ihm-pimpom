@@ -39,7 +39,7 @@ export class MarkerService {
     if (
       typeof this.fireList.find((x) => x.myCustomID === data.id) !== "undefined"
     ) {
-      this.map.removeLayer(this.fireList.find((x) => x.myCustomID === data.id));
+      this.fireList.find((x) => x.myCustomID === data.id);
     }
     this.addFire(data);
   }
@@ -99,22 +99,18 @@ export class MarkerService {
     const exist = camions.find((x) => x.id === data.id);
     console.log(exist);
     if (typeof exist !== "undefined") {
-      console.log("le camion existe déjà");
       if (exist.positionX == 0) {
-        console.log("position à 0");
         this.deleteCamion(data);
         const index = camions.indexOf(exist);
         if (index > -1) {
           camions.splice(index, 1);
         }
       } else {
-        console.log("update");
         camions.find((x) => x.id === data.id).positionX = data.positionX;
         camions.find((x) => x.id === data.id).positionY = data.positionY;
         this.updateTruck(data);
       }
     } else {
-      console.log("création nouveau camion");
       const camion = new Camion();
       camion.id = data.id;
       camion.capacite = data.capacite;
