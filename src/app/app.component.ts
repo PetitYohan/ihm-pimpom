@@ -34,8 +34,8 @@ export class AppComponent {
             feu.intensity = resp.intensity;
             feu.positionX = resp.positionX;
             feu.positionY = resp.positionY;
-            this.getFeuxValue.push(feu);
             this.markerService.updateFeu(this.getFeuxValue, resp);
+            this.getFeuxValue.push(feu);
           }
         }
       });
@@ -53,8 +53,8 @@ export class AppComponent {
             camion.positionX = resp.positionX;
             camion.positionY = resp.positionY;
             camion.type = resp.type;
-            this.getCamionsValue.push(camion);
             this.markerService.updateCamion(this.getCamionsValue, resp);
+            this.getCamionsValue.push(camion);
           }
         }
       });
