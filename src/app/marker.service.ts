@@ -39,9 +39,8 @@ export class MarkerService {
     if (
       typeof this.fireList.find((x) => x.myCustomID === data.id) !== "undefined"
     ) {
-      this.fireList.find((x) => x.myCustomID === data.id);
+      this.fireList.find((x) => x.myCustomID === data.id).intensity = data.intensity;
     }
-    this.addFire(data);
   }
 
   deleteFire(data: Feu) {
