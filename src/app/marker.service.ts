@@ -12,8 +12,8 @@ export class MarkerService {
   fireList = [];
   idClick = 1;
   map;
-  fireplaceList: any[];
-  camionList: any[];
+  fireplaceList = [];
+  camionList = [];
 
   constructor(private http: HttpClient, private popupService: PopUpService) {}
 
@@ -91,7 +91,7 @@ export class MarkerService {
             name: fp.name,
           })
         );
-        this.fireplaceList.push(fireplace);
+      this.fireplaceList.push(fireplace);
     }
   }
 
