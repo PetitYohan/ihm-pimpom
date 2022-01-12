@@ -1,6 +1,7 @@
-import { Component, AfterViewInit, Input } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
 import { MarkerService } from '../marker.service';
+import casernes from "../../assets/data/casernes.json";
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -24,7 +25,7 @@ L.Marker.prototype.options.icon = iconDefault;
 })
 export class MapComponent implements AfterViewInit {
   private map;
-  @Input() capteursData: any;
+  casernesData: any;
 
   private initMap(): void {
     this.map = L.map('map', {
@@ -45,10 +46,12 @@ export class MapComponent implements AfterViewInit {
     tiles.addTo(this.map);
   }
 
-  constructor(private markerService: MarkerService) {}
+  constructor(private markerService: MarkerService) {
+    this.casernesData = casernes;
+  }
 
   ngAfterViewInit(): void {
     this.initMap();
-    this.markerService.makeCircleMarkers(this.map, this.capteursData);
+    this.markerService.addCaserne(this.map, this.casernesData);
   }
 }

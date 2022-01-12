@@ -8,59 +8,12 @@ import { Feu } from "./feu";
   providedIn: "root",
 })
 export class MarkerService {
-  capteursData: any;
-  circleMarker: any;
-  circleList = [];
   fireList = [];
   idClick = 1;
   map;
+  fireplaceList: any[];
 
-  constructor(private http: HttpClient, private popupService: PopUpService) { }
-
-  static scaledRadius(val: number, maxVal: number): number {
-    return 1000 * (val / maxVal) + 75;
-  }
-
-  makeCircleMarkers(map: L.map, data): void {
-    this.map = map;
-    for (const c of data) {
-      const lon = c.coordinates[0];
-      const lat = c.coordinates[1];
-      const circle = L.circle([lat, lon], {
-        radius: MarkerService.scaledRadius(c.intensity, 9),
-      });
-      circle.bindPopup(this.popupService.makeCapteurPopup(c));
-      circle.myCustomID = c.id;
-      circle.addTo(map);
-      circle.on("click", (e) => {
-        this.idClick = e.target.myCustomID;
-      });
-      this.circleList[c.id] = circle;
-    }
-  }
-
-  updateCircleMarkers(map: L.map, id, intensity) {
-    var i: number;
-    for (i = 1; i <= 60; i++) {
-      if (this.circleList[i].myCustomID == id) {
-        map.removeLayer(this.circleList[i]);
-      }
-    }
-    const lon = this.circleList[id].getLatLng().lng;
-    const lat = this.circleList[id].getLatLng().lat;
-    const circle = L.circle([lat, lon], {
-      radius: MarkerService.scaledRadius(intensity, 9),
-    });
-    circle.bindPopup(
-      this.popupService.makeCapteurPopup({ id: id, intensity: intensity })
-    );
-    circle.myCustomID = id;
-    circle.addTo(map);
-    circle.on("click", (e) => {
-      this.idClick = e.target.myCustomID;
-    });
-    this.circleList[id] = circle;
-  }
+  constructor(private http: HttpClient, private popupService: PopUpService) {}
 
   addFire(data: Feu) {
     var iconFire = L.icon({
@@ -81,7 +34,9 @@ export class MarkerService {
   }
 
   updateFire(data: Feu) {
-    if (typeof this.fireList.find((x) => x.myCustomID === data.id) !== "undefined") {
+    if (
+      typeof this.fireList.find((x) => x.myCustomID === data.id) !== "undefined"
+    ) {
       this.map.removeLayer(this.fireList.find((x) => x.myCustomID === data.id));
     }
     this.addFire(data);
@@ -113,6 +68,28 @@ export class MarkerService {
       feu.positionY = data.positionY;
       feux.push(feu);
       this.addFire(feu);
+    }
+  }
+
+  addCaserne(map: L.map, data: any[]) {
+    this.map = map;
+    var iconFirePlace = L.icon({
+      iconUrl: "../assets/icons/fireplace.png",
+      iconSize: [14.26, 11.92], // size of the icon
+      iconAnchor: [7.13, 5.96], // point of the icon which will correspond to marker's location
+    });
+    for (const fp of data) {
+      const fireplace = L.marker([fp.coordinates[0], fp.coordinates[1]], {
+        icon: iconFirePlace,
+      })
+        .addTo(this.map)
+        .bindPopup(
+          this.popupService.makeFirePlacePopup({
+            id: fp.id,
+            name: fp.name,
+          })
+        );
+      console.log(fireplace);
     }
   }
 }

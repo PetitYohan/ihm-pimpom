@@ -6,11 +6,11 @@ import { Injectable } from '@angular/core';
 export class PopUpService {
   constructor() {}
 
-  makeCapteurPopup(data: any): string {
+  makeFirePlacePopup(data: any): string {
     return (
       `` +
       `<div>Id Capteur: ${data.id}</div>` +
-      `<div>Intensité détectée: ${data.intensity}</div>`
+      `<div>Nom caserne: ${data.name}</div>`
     );
   }
   
