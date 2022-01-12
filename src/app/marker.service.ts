@@ -91,7 +91,7 @@ export class MarkerService {
             name: fp.name,
           })
         );
-      console.log(fireplace);
+        this.fireplaceList.push(fireplace);
     }
   }
 
