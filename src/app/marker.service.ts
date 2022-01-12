@@ -129,13 +129,17 @@ export class MarkerService {
     if (
       typeof this.camionList.find((x) => x.myCustomID === data.id) !== "undefined"
     ) {
-      console.log(this.map._layers);
+      const lat = (data.positionX);
+      const lng = (data.positionY);
+      const newLatLng = new L.LatLng(lat, lng);
+      this.camionList.find((x) => x.myCustomID === data.id).setLatLng(newLatLng);
+      /*console.log(this.map._layers);
       console.log("remove");
       const test = this.camionList.find((x) => x.myCustomID === data.id)
       this.map.removeLayer(test);
-      console.log(this.map._layers);
+      console.log(this.map._layers);*/
     }
-    this.addTruck(data);
+    //this.addTruck(data);
   }
 
   addTruck(data: Camion) {
