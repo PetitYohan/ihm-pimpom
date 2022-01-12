@@ -45,6 +45,7 @@ export class AppComponent {
     this.httpClient
       .get("http://localhost:8080/getCamions")
       .subscribe((data: any) => {
+        console.log(data);
         if (typeof data.camions !== "undefined") {
           for (const resp of data.camions) {
             console.log("création camion");
