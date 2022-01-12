@@ -47,6 +47,7 @@ export class AppComponent {
       .subscribe((data: any) => {
         if (typeof data.camions !== "undefined") {
           for (const resp of data.camions) {
+            console.log("création camion");
             const camion = new Camion();
             camion.id = resp.id;
             camion.capacite = resp.capacite;

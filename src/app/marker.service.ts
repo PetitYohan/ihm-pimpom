@@ -122,9 +122,9 @@ export class MarkerService {
 
   updateTruck(data: Camion) {
     if (
-      typeof this.fireList.find((x) => x.myCustomID === data.id) !== "undefined"
+      typeof this.camionList.find((x) => x.myCustomID === data.id) !== "undefined"
     ) {
-      this.map.removeLayer(this.fireList.find((x) => x.myCustomID === data.id));
+      this.map.removeLayer(this.camionList.find((x) => x.myCustomID === data.id));
     }
     this.addTruck(data);
   }
