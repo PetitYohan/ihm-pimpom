@@ -131,7 +131,7 @@ export class MarkerService {
     ) {
       console.log(this.map._layers);
       console.log("remove");
-      this.map.removeLayer(this.camionList.find((x) => x.myCustomID === data.id));
+      this.map.remove(this.camionList.find((x) => x.myCustomID === data.id));
       console.log(this.map._layers);
     }
     this.addTruck(data);
