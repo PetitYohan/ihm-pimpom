@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { PopUpService } from "./popup.service";
 import * as L from "leaflet";
 import { Feu } from "./feu";
+import { Camion } from "./camion";
 
 @Injectable({
   providedIn: "root",
@@ -12,6 +13,7 @@ export class MarkerService {
   idClick = 1;
   map;
   fireplaceList: any[];
+  camionList: any[];
 
   constructor(private http: HttpClient, private popupService: PopUpService) {}
 
@@ -91,5 +93,65 @@ export class MarkerService {
         );
       console.log(fireplace);
     }
+  }
+
+  updateCamion(camions: Camion[], data: Camion) {
+    const exist = camions.find((x) => x.id === data.id);
+    if (typeof exist !== "undefined") {
+      if (exist.positionX == 0) {
+        this.deleteCamion(data);
+        const index = camions.indexOf(exist);
+        if (index > -1) {
+          camions.splice(index, 1);
+        }
+      } else {
+        camions.find((x) => x.id === data.id).positionX = data.positionX;
+        camions.find((x) => x.id === data.id).positionY = data.positionY;
+        this.updateTruck(data);
+      }
+    } else {
+      const camion = new Camion();
+      camion.id = data.id;
+      camion.capacite = data.capacite;
+      camion.positionX = data.positionX;
+      camion.positionY = data.positionY;
+      camions.push(camion);
+      this.addTruck(camion);
+    }
+  }
+
+  updateTruck(data: Camion) {
+    if (
+      typeof this.fireList.find((x) => x.myCustomID === data.id) !== "undefined"
+    ) {
+      this.map.removeLayer(this.fireList.find((x) => x.myCustomID === data.id));
+    }
+    this.addTruck(data);
+  }
+
+  addTruck(data: Camion) {
+    var iconTruck = L.icon({
+      iconUrl: "../assets/icons/camion-de-pompiers.png",
+      iconSize: [19.2, 25.6], // size of the icon
+      iconAnchor: [9.6, 12.8], // point of the icon which will correspond to marker's location
+    });
+    const camion = L.marker([data.positionY, data.positionX], {
+      icon: iconTruck,
+    })
+      .addTo(this.map)
+      .bindPopup(
+        this.popupService.makeCamionPopup({
+          id: data.id,
+          capacite: data.capacite,
+          type: data.type,
+        })
+      );
+    camion.myCustomID = data.id;
+    this.camionList.push(camion);
+  }
+
+  deleteCamion(data: Camion) {
+    const toremove = this.camionList.find((x) => x.myCustomID === data.id);
+    this.map.removeLayer(toremove);
   }
 }

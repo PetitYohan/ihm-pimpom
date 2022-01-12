@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class PopUpService {
   constructor() {}
@@ -9,16 +9,25 @@ export class PopUpService {
   makeFirePlacePopup(data: any): string {
     return (
       `` +
-      `<div>Id Capteur: ${data.id}</div>` +
+      `<div>Id caserne: ${data.id}</div>` +
       `<div>Nom caserne: ${data.name}</div>`
     );
   }
-  
+
   makeFirePopup(data: any): string {
     return (
       `` +
-      `<div>Id Feu: ${data.id}</div>` +
-      `<div>Intensité Feu: ${data.intensity}</div>`
+      `<div>Id feu: ${data.id}</div>` +
+      `<div>Intensité feu: ${data.intensity}</div>`
+    );
+  }
+
+  makeCamionPopup(data: any): string {
+    return (
+      `` +
+      `<div>Id camion: ${data.id}</div>` +
+      `<div>Capacite camion: ${data.capacite}</div>` +
+      `<div>Type camion: ${data.type}</div>`
     );
   }
 }

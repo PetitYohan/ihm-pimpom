@@ -1,8 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
-import { MatIconRegistry } from "@angular/material/icon";
-import { DomSanitizer } from "@angular/platform-browser";
-import { Capteur } from "./capteur";
+import { Camion } from "./camion";
 import { Feu } from "./feu";
 import { MarkerService } from "./marker.service";
 
@@ -13,31 +11,21 @@ import { MarkerService } from "./marker.service";
 })
 export class AppComponent {
   idCapteur: number;
-  slide = false;
-  getCapteursValue: Capteur[] = [
-    { id: 0, intensity: 0 },
-    { id: 1, intensity: 0 },
-    { id: 2, intensity: 0 },
-    { id: 3, intensity: 0 },
-  ];
   getFeuxValue: Feu[] = [{ id: 0, intensity: 0, positionX: 0, positionY: 0 }];
+  getCamionsValue: Camion[] = [
+    { id: 0, capacite: 0, positionX: 0, positionY: 0, type: "" },
+  ];
 
   constructor(
-    private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer,
     private httpClient: HttpClient,
     private markerService: MarkerService
   ) {
     setInterval(() => this.onActualisation(), 15000);
   }
 
-  sliderToggle() {
-    this.slide = !this.slide;
-  }
-
   getFeux() {
     this.httpClient
-      .get("http://localhost:8000/getFeux")
+      .get("http://localhost:8080/getFeux")
       .subscribe((data: any) => {
         if (typeof data.feux !== "undefined") {
           for (const resp of data.feux) {
@@ -53,11 +41,27 @@ export class AppComponent {
       });
   }
 
-  capteurChangedHandler(c) {
-    console.log(c);
+  getCamions() {
+    this.httpClient
+      .get("http://localhost:8080/getCamions")
+      .subscribe((data: any) => {
+        if (typeof data.camions !== "undefined") {
+          for (const resp of data.camions) {
+            const camion = new Camion();
+            camion.id = resp.id;
+            camion.capacite = resp.capacite;
+            camion.positionX = resp.positionX;
+            camion.positionY = resp.positionY;
+            camion.type = resp.type;
+            this.getCamionsValue.push(camion);
+            this.markerService.updateCamion(this.getCamionsValue, resp);
+          }
+        }
+      });
   }
 
   onActualisation(): any {
     this.getFeux();
+    this.getCamions();
   }
 }
