@@ -98,6 +98,7 @@ export class MarkerService {
   updateCamion(camions: Camion[], data: Camion) {
     const exist = camions.find((x) => x.id === data.id);
     if (typeof exist !== "undefined") {
+      console.log("exist déja");
       if (exist.positionX == 0) {
         this.deleteCamion(data);
         const index = camions.indexOf(exist);
@@ -107,6 +108,7 @@ export class MarkerService {
       } else {
         camions.find((x) => x.id === data.id).positionX = data.positionX;
         camions.find((x) => x.id === data.id).positionY = data.positionY;
+        console.log("update");
         this.updateTruck(data);
       }
     } else {
