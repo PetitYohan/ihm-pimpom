@@ -97,6 +97,7 @@ export class MarkerService {
 
   updateCamion(camions: Camion[], data: Camion) {
     const exist = camions.find((x) => x.id === data.id);
+    console.log(exist);
     if (typeof exist !== "undefined") {
       console.log("le camion existe déjà");
       if (exist.positionX == 0) {
