@@ -29,7 +29,7 @@ export class AppComponent {
       .subscribe((data: any) => {
         if (typeof data.feux !== "undefined") {
           for (const resp of data.feux) {
-            const feu = new Feu();
+            const feu = new Feu;
             feu.id = resp.id;
             feu.intensity = resp.intensity;
             feu.positionX = resp.positionX;
@@ -47,7 +47,7 @@ export class AppComponent {
       .subscribe((data: any) => {
         if (typeof data.camions !== "undefined") {
           for (const resp of data.camions) {
-            const camion = new Camion();
+            const camion = new Camion;
             camion.id = resp.id;
             camion.capacite = resp.capacite;
             camion.positionX = resp.positionX;
