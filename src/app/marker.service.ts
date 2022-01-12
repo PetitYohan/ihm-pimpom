@@ -123,7 +123,7 @@ export class MarkerService {
   }
 
   updateTruck(data: Camion) {
-    console.log(data);
+    console.log(this.camionList);
     console.log(this.camionList.find((x) => x.myCustomID === data.id));
     if (
       typeof this.camionList.find((x) => x.myCustomID === data.id) !== "undefined"
