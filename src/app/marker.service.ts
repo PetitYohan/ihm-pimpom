@@ -129,8 +129,8 @@ export class MarkerService {
     if (
       typeof this.camionList.find((x) => x.myCustomID === data.id) !== "undefined"
     ) {
-      const lat = (data.positionX);
-      const lng = (data.positionY);
+      const lat = (data.positionY);
+      const lng = (data.positionX);
       const newLatLng = new L.LatLng(lat, lng);
       this.camionList.find((x) => x.myCustomID === data.id).setLatLng(newLatLng);
       /*console.log(this.map._layers);
