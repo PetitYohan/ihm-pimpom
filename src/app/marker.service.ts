@@ -15,7 +15,7 @@ export class MarkerService {
   fireplaceList = [];
   camionList = [];
 
-  constructor(private http: HttpClient, private popupService: PopUpService) {}
+  constructor(private http: HttpClient, private popupService: PopUpService) { }
 
   addFire(data: Feu) {
     var iconFire = L.icon({
@@ -98,20 +98,22 @@ export class MarkerService {
   updateCamion(camions: Camion[], data: Camion) {
     const exist = camions.find((x) => x.id === data.id);
     if (typeof exist !== "undefined") {
-      console.log("exist déja");
+      console.log("le camion existe déjà");
       if (exist.positionX == 0) {
+        console.log("position à 0");
         this.deleteCamion(data);
         const index = camions.indexOf(exist);
         if (index > -1) {
           camions.splice(index, 1);
         }
       } else {
+        console.log("update");
         camions.find((x) => x.id === data.id).positionX = data.positionX;
         camions.find((x) => x.id === data.id).positionY = data.positionY;
-        console.log("update");
         this.updateTruck(data);
       }
     } else {
+      console.log("création nouveau camion");
       const camion = new Camion();
       camion.id = data.id;
       camion.capacite = data.capacite;
@@ -126,8 +128,7 @@ export class MarkerService {
     if (
       typeof this.camionList.find((x) => x.myCustomID === data.id) !== "undefined"
     ) {
-      console.log(this.camionList.find((x) => x.myCustomID === data.id));
-      this.camionList.find((x) => x.myCustomID === data.id).remove();
+      this.map.removeLayer(this.camionList.find((x) => x.myCustomID === data.id));
     }
     this.addTruck(data);
   }
