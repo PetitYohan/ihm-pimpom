@@ -141,8 +141,8 @@ export class MarkerService {
     });
     const lat = data.positionY;
     const lng = data.positionX;
-    console.log(lat,lng);
-    const camion = L.marker([lat, lng], {
+    console.log(lng,lat);
+    const camion = L.marker([lng, lat], {
       icon: iconTruck,
     })
       .addTo(this.map)
