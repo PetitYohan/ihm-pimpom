@@ -23,7 +23,7 @@ export class MarkerService {
       iconSize: [19.2, 25.6], // size of the icon
       iconAnchor: [9.6, 12.8], // point of the icon which will correspond to marker's location
     });
-    const fire = L.marker([data.positionY, data.positionX], { icon: iconFire })
+    const fire = L.marker([data.positionX, data.positionY], { icon: iconFire })
       .addTo(this.map)
       .bindPopup(
         this.popupService.makeFirePopup({
@@ -138,7 +138,7 @@ export class MarkerService {
       iconSize: [16, 16], // size of the icon
       iconAnchor: [8, 8], // point of the icon which will correspond to marker's location
     });
-    const camion = L.marker([data.positionY, data.positionX], {
+    const camion = L.marker([data.positionX, data.positionY], {
       icon: iconTruck,
     })
       .addTo(this.map)
