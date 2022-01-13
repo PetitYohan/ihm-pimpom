@@ -128,7 +128,7 @@ export class MarkerService {
     ) {
       const lat = (data.positionY);
       const lng = (data.positionX);
-      const newLatLng = new L.LatLng(lat, lng);
+      const newLatLng = new L.LatLng(lng, lat);
       this.camionList.find((x) => x.myCustomID === data.id).setLatLng(newLatLng);
     }
   }
