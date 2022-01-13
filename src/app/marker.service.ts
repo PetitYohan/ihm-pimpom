@@ -139,7 +139,10 @@ export class MarkerService {
       iconSize: [16, 16], // size of the icon
       iconAnchor: [8, 8], // point of the icon which will correspond to marker's location
     });
-    const camion = L.marker([data.positionY, data.positionX], {
+    const lat = data.positionY;
+    const lng = data.positionX;
+    console.log(lat,lng);
+    const camion = L.marker([lat, lng], {
       icon: iconTruck,
     })
       .addTo(this.map)
