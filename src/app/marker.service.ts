@@ -29,6 +29,8 @@ export class MarkerService {
         this.popupService.makeFirePopup({
           id: data.id,
           intensity: data.intensity,
+          positionX: data.positionX,
+          positionY: data.positionY,
         })
       );
     fire.myCustomID = data.id;

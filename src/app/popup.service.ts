@@ -18,7 +18,8 @@ export class PopUpService {
     return (
       `` +
       `<div>Id feu: ${data.id}</div>` +
-      `<div>Intensité feu: ${data.intensity}</div>`
+      `<div>Intensité feu: ${data.intensity}</div>`+
+      `<div>Position feu: ${data.positionX} ${data.positionY}</div>`
     );
   }
 
